@@ -1,0 +1,8 @@
+<ListOfTask>
+  <Task file="" description="Creat Connection class" completed="True" />
+  <Task file="" description="Create Node Class" completed="True" />
+  <Task file="" description="Create Graph Class" priority="High" completed="True" />
+  <Task file="" description="Create AStarPathfinding Algorythm " priority="High" />
+  <Task file="" description="Astar" />
+  <Task file="" description="Fix Dijkstra" />
+</ListOfTask>

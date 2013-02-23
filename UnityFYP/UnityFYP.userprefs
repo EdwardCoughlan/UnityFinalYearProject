@@ -1,0 +1,60 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\PathFinder.cs">
+    <Files>
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Graph.cs" Line="40" Column="6" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Node.cs" Line="11" Column="3" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\PathFinder.cs" Line="204" Column="5" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Connection.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="FinalYearProject Assets" expanded="True">
+                <Node name="Scripts" expanded="True">
+                  <Node name="AI Scripts" expanded="True">
+                    <Node name="Pathfinding Scripts" expanded="True">
+                      <Node name="PathFinder.cs" selected="True" />
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Assembly-UnityScript" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Standard Assets (Mobile)" expanded="True">
+                <Node name="Scripts" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Assembly-UnityScript-firstpass" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Standard Assets" expanded="True">
+                <Node name="Character Controllers" expanded="True">
+                  <Node name="Sources" expanded="True">
+                    <Node name="Scripts" expanded="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>connections.</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
