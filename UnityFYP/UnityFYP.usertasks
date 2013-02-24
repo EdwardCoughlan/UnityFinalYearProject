@@ -4,5 +4,6 @@
   <Task file="" description="Create Graph Class" priority="High" completed="True" />
   <Task file="" description="Create AStarPathfinding Algorythm " priority="High" />
   <Task file="" description="Astar" />
-  <Task file="" description="Fix Dijkstra" />
+  <Task file="" description="Fix Dijkstra" completed="True" />
+  <Task file="" description="Create a Node genereation mesh" />
 </ListOfTask>

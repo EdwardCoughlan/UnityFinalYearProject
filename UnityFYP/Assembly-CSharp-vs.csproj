@@ -47,6 +47,7 @@
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Connection.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Graph.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Heuristic.cs" />
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavigationArea.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Node.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NodeRecord.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\PathFinder.cs" />

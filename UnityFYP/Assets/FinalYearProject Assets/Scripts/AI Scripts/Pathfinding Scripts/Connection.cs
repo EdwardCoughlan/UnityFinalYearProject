@@ -25,8 +25,4 @@ public class Connection
 		this.cost = (toNode.transform.position - fromNode.transform.position).magnitude;
 	}
 	
-	public string ToString()
-	{
-		return "To node " + toNode + " From Node " + fromNode + " Cost " + cost;
-	}
 }
