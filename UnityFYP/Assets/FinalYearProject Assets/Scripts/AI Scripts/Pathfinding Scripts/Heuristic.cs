@@ -20,7 +20,7 @@ public class Heuristic {
 		this.goalNode = goalNode;
 	}
 	
-	public float euclideanDistanceEstimate(Node n)
+	public float euclideanDistanceEstimate(GameObject n)
 	{
 		return (goalNode.transform.position - n.transform.position).magnitude;
 	}

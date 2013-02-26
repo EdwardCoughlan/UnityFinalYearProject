@@ -4,21 +4,25 @@ using System.Collections.Generic;
 
 public class Node : MonoBehaviour 
 {
-	public float nodeRadius = 2.5f;
+	public float nodeRadius = 1f;
 	public LayerMask nodeLayerMask;
 	public LayerMask collisionLayerMask;
 	public List<GameObject> Neighbors;
 	public List<Connection> connections = new List<Connection>();
-	private Vector3 vect = new Vector3(0.1f,0.1f,0.1f);
+	public bool renderNodes = true;
+	public bool canGetNeighbours = true;
+	public float cost = 2.0f;
 	
 	void OnDrawGizmos()
 	{
-		Gizmos.DrawWireCube(transform.position, vect);
-		gameObject.GetComponent<Node>().generateConnections();
-		foreach(GameObject n in Neighbors)
+		if(renderNodes)
 		{
-			Gizmos.DrawWireSphere(gameObject.transform.position, 0.001f);
-			Gizmos.DrawLine(gameObject.transform.position, n.transform.position);
+			Gizmos.DrawWireSphere(transform.position, 0.1f);
+			foreach(GameObject n in Neighbors)
+			{
+				Gizmos.DrawWireSphere(gameObject.transform.position, 0.001f);
+				Gizmos.DrawLine(gameObject.transform.position, n.transform.position);
+			}
 		}
 	}
 	
@@ -58,23 +62,27 @@ public class Node : MonoBehaviour
 	[ContextMenu ("Get neighbouring nodes")]
 	void getNeighbouringNodes()
 	{
-		Neighbors.Clear();
-		Collider[] cols = Physics.OverlapSphere(transform.position, nodeRadius, nodeLayerMask);
-		foreach(Collider col in cols)
+		if(canGetNeighbours)
 		{
-			if(col.gameObject != gameObject)
+			Neighbors.Clear();
+			Collider[] cols = Physics.OverlapSphere(transform.position, nodeRadius, nodeLayerMask);
+			foreach(Collider col in cols)
 			{
-				RaycastHit hit;
-				Physics.Raycast(transform.position, (col.transform.position - transform.position), out hit, nodeRadius,collisionLayerMask);
-				if(hit.transform != null)
+				if(col.gameObject != gameObject)
 				{
-					if(hit.transform.gameObject.GetComponent<Node>() == col.gameObject.GetComponent<Node>())
+					RaycastHit hit;
+					Physics.Raycast(transform.position, (col.transform.position - transform.position), out hit, nodeRadius,collisionLayerMask);
+					if(hit.transform != null)
 					{
-						Neighbors.Add(col.gameObject);
+						if(hit.transform.gameObject.GetComponent<Node>() == col.gameObject.GetComponent<Node>())
+						{
+							Neighbors.Add(col.gameObject);
+						}
 					}
 				}
 			}
+			generateConnections();
+			
 		}
-		generateConnections();
 	}
 }

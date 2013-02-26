@@ -6,6 +6,9 @@ public class NodeRecord
 	public GameObject node;
 	public Connection connection = null;
 	public float CostSoFar =0.0f;
+	public float estimatedTotalCost = 0.0f;
+	
+	
 	
 	public NodeRecord(GameObject node, Connection connection,float costSoFar)
 	{

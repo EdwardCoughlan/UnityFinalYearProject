@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public static class pathfinder 
+public class pathfinder 
 {	
-	public static List<GameObject> Dijkstra(GameObject start, GameObject end)
+	public List<GameObject> Dijkstra(GameObject start, GameObject end)
 	{
 		List<Connection> connections = new List<Connection>();
 		GameObject endNode = start;
@@ -85,103 +85,96 @@ public static class pathfinder
 		}
 	}
 	
-	
-/*	public static void astar(List<Node> graph, Node start, Node end)
+	public List<GameObject> AStar(GameObject start, GameObject end, Heuristic heuristic)
 	{
-		Heuristic heuristic = new Heuristic(end);
+		List<Connection> connections = new List<Connection>();
+		GameObject endNode = start;
+		float endNodeCost  = 0f;
+		float endNodeHeuristic = 0.0f;
+		NodeRecord endNodeRecord = new NodeRecord();
+		
 		NodeRecord startRecord = new NodeRecord();
-		startRecord.setNode(start);
-		startRecord.setCostSoFar(0);
-		startRecord.estimateTotalCost(heuristic.euclideanDistanceEstimate(start));
+		startRecord.node = start;
+		startRecord.CostSoFar = 0.0f;
+		startRecord.estimatedTotalCost = heuristic.euclideanDistanceEstimate(start);
 		
 		List<NodeRecord> openList = new List<NodeRecord>();
 		List<NodeRecord> closedList = new List<NodeRecord>();
 		openList.Add(startRecord);
-		List<Connection> connections = new List<Connection>();
-		
 		
 		NodeRecord current = startRecord;
-		Node toNode;
-		float toNodeCost = 0.0f;
-		NodeRecord toNodeRecord = new NodeRecord();
-		float toNodeHeuristic = 0;
 		
-		foreach(NodeRecord nr in openList)
+		while(openList.Count > 0)
 		{
 			current = getSmallestElement(openList);
 			
-			Debug.Log ("Checking if Current node is the goal");
-			if(current.getNode() == end)
+			if(current.node.Equals(end))
 			{
-				Debug.Log ("Goal found");
 				break;
 			}
-			Debug.Log ("Goal not found");
-			
-			connections = current.getNode().getConnections();
-			
-			foreach(Connection c in connections)
+			connections = current.node.GetComponent<Node>().connections;
+			foreach(Connection connection in connections)
 			{
-				toNode = c.getToNode();
-				toNodeCost = current.getCostSoFar()  + c.getCost();
+				endNode = connection.toNode;
+				endNodeCost = current.CostSoFar+connection.cost;
 				
 				if(isInList(endNode, closedList))
 				{
-					toNodeRecord = findNodeInList(toNode);
+					endNodeRecord = findNodeInList(endNode, closedList);
 					
-					if(toNodeRecord.getCostSoFar() <= toNodeCost)
+					if(endNodeRecord.CostSoFar <= endNodeCost)
 					{
 						continue;
 					}
-					closedList.Remove(toNodeRecord);
+					closedList.Remove(endNodeRecord);
 					
-					//possibly wrong checck
-					toNodeHeuristic = toNodeCost - toNodeRecord.getCostSoFar();
+					endNodeHeuristic = endNodeRecord.estimatedTotalCost - endNodeRecord.CostSoFar;
 				}
-				else if(isInList(toNode, openList))
+				else if(isInList(endNode, openList))
 				{
-					toNodeRecord = findNodeInList(toNode, openList);
-					
-					if(toNodeRecord.getCostSoFar() <= toNodeCost)
+					endNodeRecord = findNodeInList(endNode, openList);
+					if(endNodeRecord.CostSoFar <= endNodeCost)
 					{
 						continue;
 					}
-					toNodeHeuristic = toNodeCost - toNodeRecord.getCostSoFar();
+					endNodeHeuristic = endNodeCost - endNodeRecord.CostSoFar;
 				}
 				else
 				{
-					toNodeRecord = new NodeRecord();
-					toNodeRecord.setNode(toNode);
-					
-					
-					toNodeRecord.estimateTotalCost(heuristic.euclideanDistanceEstimate(toNode));
+					endNodeRecord = new NodeRecord(endNode);
+					endNodeHeuristic = heuristic.euclideanDistanceEstimate(endNode);
 				}
-				toNodeRecord.setCostSoFar(toNodeCost);
-				toNodeRecord.setConnection(c);
-				toNodeRecord.estimateTotalCost(toNodeCost + toNodeHeuristic);
-				openList.Add(toNodeRecord);
+				endNodeRecord.CostSoFar = endNodeCost;
+				endNodeRecord.connection = connection;
+				endNodeRecord.estimatedTotalCost = endNodeCost + endNodeHeuristic;
+				
+				if(!(isInList(endNode, openList)))
+				{
+					openList.Add(endNodeRecord);
+				}
 			}
+			
 			openList.Remove(current);
 			closedList.Add(current);
-			
 		}
-		if(current.getNode != end)
+		if(current.node != end)
 		{
 			return null;
 		}
-		
 		else
 		{
-			List<Node> path = new List<Node>();
-			Node pathPiece = current.getConnection;
-			while(pathPiece != start)
+			List<GameObject> path = new List<GameObject>();
+			while(current.node != start)
 			{
-				path.Add(pathPiece);
+				path.Add(current.node);
+				current = findNodeInList(current.connection.fromNode, closedList);
 			}
+			path.Reverse();
+			return path;
 		}
-	}*/
+	}
 		
-	public static NodeRecord getSmallestElement(List<NodeRecord> l)
+	public NodeRecord getSmallestElement(List<NodeRecord> l)
 	{
 		if(l.Count == 1)
 		{
@@ -205,7 +198,7 @@ public static class pathfinder
 		return min;
 	}
 	
-	public static NodeRecord findNodeRecordUsingFromNode(GameObject n, List<NodeRecord> l)
+	public NodeRecord findNodeRecordUsingFromNode(GameObject n, List<NodeRecord> l)
 	{
 		Connection temp;
 		foreach(NodeRecord nr in l)
@@ -221,7 +214,7 @@ public static class pathfinder
 	}
 	
 	
-	public static bool isInList(GameObject n, List<NodeRecord> l)
+	public bool isInList(GameObject n, List<NodeRecord> l)
 	{
 		foreach(NodeRecord nr in l)
 		{
@@ -233,7 +226,7 @@ public static class pathfinder
 		return false;
 	}
 	
-	private static  NodeRecord findNodeInList(GameObject n, List<NodeRecord> l)
+	private  NodeRecord findNodeInList(GameObject n, List<NodeRecord> l)
 	{
 		foreach(NodeRecord nr in l)
 		{
@@ -245,7 +238,7 @@ public static class pathfinder
 		return null;
 	}
 	
-	private static  bool checkIsNodesEqual(GameObject n1, GameObject n2)
+	private  bool checkIsNodesEqual(GameObject n1, GameObject n2)
 	{
 		if(n1 == n2)
 		{

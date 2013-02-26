@@ -30,7 +30,7 @@ public class Graph : MonoBehaviour
 			
 			//Graph g = new Graph(connections);
 			//Debug.Log(g);
-			List<GameObject> path = pathfinder.Dijkstra(start,goal);
+			/*List<GameObject> path = pathfinder.Dijkstra(start,goal);
 			foreach(GameObject n in path)
 			{
 				current = n;
@@ -45,7 +45,7 @@ public class Graph : MonoBehaviour
 					break;
 				}
 				previous =n;
-			}
+			}*/
 		}
 	}
 }
