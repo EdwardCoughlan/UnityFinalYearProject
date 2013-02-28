@@ -13,6 +13,8 @@ public class Node : MonoBehaviour
 	public bool canGetNeighbours = true;
 	public float cost = 2.0f;
 	
+	private bool processed = false;
+	
 	void OnDrawGizmos()
 	{
 		if(renderNodes)
@@ -20,7 +22,7 @@ public class Node : MonoBehaviour
 			Gizmos.DrawWireSphere(transform.position, 0.1f);
 			foreach(GameObject n in Neighbors)
 			{
-				Gizmos.DrawWireSphere(gameObject.transform.position, 0.001f);
+				//Gizmos.DrawWireSphere(gameObject.transform.position, 0.001f);
 				Gizmos.DrawLine(gameObject.transform.position, n.transform.position);
 			}
 		}
@@ -71,7 +73,7 @@ public class Node : MonoBehaviour
 				if(col.gameObject != gameObject)
 				{
 					RaycastHit hit;
-					Physics.Raycast(transform.position, (col.transform.position - transform.position), out hit, nodeRadius,collisionLayerMask);
+					Physics.Raycast(transform.position, (col.transform.position - transform.position), out hit, nodeRadius);
 					if(hit.transform != null)
 					{
 						if(hit.transform.gameObject.GetComponent<Node>() == col.gameObject.GetComponent<Node>())
@@ -84,5 +86,16 @@ public class Node : MonoBehaviour
 			generateConnections();
 			
 		}
+	}
+	
+	
+	public void setProcessed(bool input)
+	{
+		this.processed = input;
+	}
+	
+	public bool getProcessed()
+	{
+		return this.processed;
 	}
 }
