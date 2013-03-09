@@ -4,7 +4,70 @@ using System.Collections.Generic;
 
 public class pathfinder 
 {	
-	public List<GameObject> Dijkstra(GameObject start, GameObject end)
+	public static Stack<GameObject> Dijkstra(GameObject[] Graph, GameObject source, GameObject target)
+	{
+		Dictionary<GameObject,float> dist = new Dictionary<GameObject, float>();
+		Dictionary<GameObject,GameObject> previous = new Dictionary<GameObject, GameObject>();
+		List<GameObject> Q = new List<GameObject>();
+		
+		foreach(GameObject v in Graph)
+		{
+			dist[v] = Mathf.Infinity;
+			previous[v] = null;
+			Q.Add(v);
+		}
+		
+		dist[source] = 0;
+		
+		while(Q.Count > 0)
+		{
+			float shortestDistance = Mathf.Infinity;
+			GameObject shortestDistanceNode = null;
+			foreach(GameObject obj in Q)
+			{
+				if(dist[obj] < shortestDistance)
+				{
+					shortestDistance = dist[obj];
+					shortestDistanceNode = obj;
+				}
+			}
+			
+			GameObject u = shortestDistanceNode;
+			
+			Q.Remove(u);
+			
+			
+			//Check to see if we made it to the target
+			if(u == target)
+			{
+				Stack<GameObject> S = new Stack<GameObject>();
+				while(previous[u] != null)
+				{
+					S.Push (u);
+					u = previous[u];
+				}
+				return S;
+			}
+			
+			if(dist[u] == Mathf.Infinity)
+			{
+				break;
+			}
+			
+			foreach(GameObject v in u.GetComponent<Node>().neighbors)
+			{
+				float alt = dist[u] + (u.transform.position - v.transform.position).magnitude;
+				
+				if(alt < dist[v])
+				{
+					 dist[v] = alt;
+					 previous[v] = u;
+				}
+			}
+		}
+		return null;
+	}
+	public static Stack<GameObject> Dijkstra1(GameObject start, GameObject end)
 	{
 		List<Connection> connections = new List<Connection>();
 		GameObject endNode = start;
@@ -74,18 +137,17 @@ public class pathfinder
 		}
 		else
 		{
-			List<GameObject> path = new List<GameObject>();
+			Stack<GameObject> path = new Stack<GameObject>();
 			while(current.node != start)
 			{
-				path.Add(current.node);
+				path.Push(current.node);
 				current = findNodeInList(current.connection.fromNode, closedList);
 			}
-			path.Reverse();
 			return path;
 		}
 	}
 	
-	public List<GameObject> AStar(GameObject start, GameObject end, Heuristic heuristic)
+	public static Stack<GameObject> AStar(GameObject start, GameObject end, Heuristic heuristic)
 	{
 		List<Connection> connections = new List<Connection>();
 		GameObject endNode = start;
@@ -163,18 +225,18 @@ public class pathfinder
 		}
 		else
 		{
-			List<GameObject> path = new List<GameObject>();
+			Stack<GameObject> path = new Stack<GameObject>();
 			while(current.node != start)
 			{
-				path.Add(current.node);
+				path.Push(current.node);
 				current = findNodeInList(current.connection.fromNode, closedList);
 			}
-			path.Reverse();
+			//path.Reverse();
 			return path;
 		}
 	}
 		
-	public NodeRecord getSmallestElement(List<NodeRecord> l)
+	public static NodeRecord getSmallestElement(List<NodeRecord> l)
 	{
 		if(l.Count == 1)
 		{
@@ -198,7 +260,7 @@ public class pathfinder
 		return min;
 	}
 	
-	public NodeRecord findNodeRecordUsingFromNode(GameObject n, List<NodeRecord> l)
+	public static NodeRecord findNodeRecordUsingFromNode(GameObject n, List<NodeRecord> l)
 	{
 		Connection temp;
 		foreach(NodeRecord nr in l)
@@ -214,7 +276,7 @@ public class pathfinder
 	}
 	
 	
-	public bool isInList(GameObject n, List<NodeRecord> l)
+	public static bool isInList(GameObject n, List<NodeRecord> l)
 	{
 		foreach(NodeRecord nr in l)
 		{
@@ -226,7 +288,7 @@ public class pathfinder
 		return false;
 	}
 	
-	private  NodeRecord findNodeInList(GameObject n, List<NodeRecord> l)
+	private static NodeRecord findNodeInList(GameObject n, List<NodeRecord> l)
 	{
 		foreach(NodeRecord nr in l)
 		{
@@ -238,7 +300,7 @@ public class pathfinder
 		return null;
 	}
 	
-	private  bool checkIsNodesEqual(GameObject n1, GameObject n2)
+	private static bool checkIsNodesEqual(GameObject n1, GameObject n2)
 	{
 		if(n1 == n2)
 		{

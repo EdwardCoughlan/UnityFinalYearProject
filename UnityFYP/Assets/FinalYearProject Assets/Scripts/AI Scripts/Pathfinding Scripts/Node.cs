@@ -1,26 +1,27 @@
-using UnityEngine;
+	using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[ExecuteInEditMode]
 public class Node : MonoBehaviour 
 {
 	public float nodeRadius = 1f;
 	public LayerMask nodeLayerMask;
 	public LayerMask collisionLayerMask;
-	public List<GameObject> Neighbors;
+	public List<GameObject> neighbors;
+	
 	public List<Connection> connections = new List<Connection>();
 	public bool renderNodes = true;
 	public bool canGetNeighbours = true;
 	public float cost = 2.0f;
 	
-	private bool processed = false;
 	
 	void OnDrawGizmos()
 	{
 		if(renderNodes)
 		{
 			Gizmos.DrawWireSphere(transform.position, 0.1f);
-			foreach(GameObject n in Neighbors)
+			foreach(GameObject n in neighbors)
 			{
 				//Gizmos.DrawWireSphere(gameObject.transform.position, 0.001f);
 				Gizmos.DrawLine(gameObject.transform.position, n.transform.position);
@@ -28,8 +29,33 @@ public class Node : MonoBehaviour
 		}
 	}
 	
-
-	public void addConnection(Connection c)
+	void getNeighbouringNodes()
+	{
+		if(canGetNeighbours)
+		{
+			neighbors.Clear();
+			Collider[] cols = Physics.OverlapSphere(transform.position, nodeRadius, nodeLayerMask);
+			foreach(Collider col in cols)
+			{
+				if(col.gameObject != gameObject)
+				{
+					RaycastHit hit;
+					Physics.Raycast(transform.position, (col.transform.position - transform.position), out hit, nodeRadius);
+					if(hit.transform != null)
+					{
+						if(hit.transform.gameObject.GetComponent<Node>() == col.gameObject.GetComponent<Node>())
+						{
+							neighbors.Add(col.gameObject);
+						}
+					}
+				}
+			}
+			generateConnections();
+			
+		}
+	}
+	
+		public void addConnection(Connection c)
 	{
 		connections.Add(c);
 	}
@@ -42,18 +68,14 @@ public class Node : MonoBehaviour
 	void generateConnections()
 	{
 		connections.Clear();
-		if(Neighbors.Count == connections.Count)
-		{
-			connections  = connections;
-		}
-		else if( connections.Count > Neighbors.Count)
+		if( connections.Count > neighbors.Count)
 		{
 			connections = new List<Connection>();
 		}
 		else
 		{
 			Connection c;
-			foreach(GameObject n in Neighbors)
+			foreach(GameObject n in neighbors)
 			{
 				c= new Connection(gameObject, n);
 				connections.Add(c);
@@ -61,41 +83,31 @@ public class Node : MonoBehaviour
 		}
 	}
 	
-	[ContextMenu ("Get neighbouring nodes")]
-	void getNeighbouringNodes()
+	
+	
+	[ContextMenu ("Connect Node to Neighbors")]
+	void FindNeighbors()
 	{
-		if(canGetNeighbours)
+		neighbors.Clear();
+		
+		Collider [] cols = Physics.OverlapSphere (transform.position, nodeRadius, nodeLayerMask);
+		foreach(Collider node in cols)
 		{
-			Neighbors.Clear();
-			Collider[] cols = Physics.OverlapSphere(transform.position, nodeRadius, nodeLayerMask);
-			foreach(Collider col in cols)
+			if (node.gameObject != gameObject)
 			{
-				if(col.gameObject != gameObject)
+				RaycastHit hit;
+				Physics.Raycast(transform.position, (node.transform.position - transform.position),out hit, nodeRadius, collisionLayerMask);
+				
+				if (hit.transform != null)
 				{
-					RaycastHit hit;
-					Physics.Raycast(transform.position, (col.transform.position - transform.position), out hit, nodeRadius);
-					if(hit.transform != null)
+					if (hit.transform.gameObject == node.gameObject)
 					{
-						if(hit.transform.gameObject.GetComponent<Node>() == col.gameObject.GetComponent<Node>())
-						{
-							Neighbors.Add(col.gameObject);
-						}
+						neighbors.Add (node.gameObject);
 					}
 				}
+				
 			}
-			generateConnections();
-			
 		}
-	}
-	
-	
-	public void setProcessed(bool input)
-	{
-		this.processed = input;
-	}
-	
-	public bool getProcessed()
-	{
-		return this.processed;
+		
 	}
 }

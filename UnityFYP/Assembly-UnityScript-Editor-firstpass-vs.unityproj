@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{5D166EBD-9FCD-1202-57AB-B88720312E6D}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-UnityScript-Editor-firstpass</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_1;UNITY_4_0;UNITY_STANDALONE_WIN;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Standard Assets\Editor\Image Effects\BloomAndFlaresEditor.js" />
+     <Compile Include="Assets\Standard Assets\Editor\Image Effects\ColorCorrectionCurvesEditor.js" />
+     <Compile Include="Assets\Standard Assets\Editor\Image Effects\DepthOfFieldEditor.js" />
+     <Compile Include="Assets\Standard Assets\Editor\Image Effects\EdgeDetectEffectNormalsEditor.js" />
+     <Compile Include="Assets\Standard Assets\Editor\Image Effects\SunShaftsEditor.js" />
+     <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_DepthOfField\SeparableWeightedBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_BloomAndFlares\AddStuff.shader" />
+     <None Include="Assets\Standard Assets\Blob-Shadow\ProjectorAdditive.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\ExtractSkyboxShader.shader" />
+     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\ShowAlphaChannel.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\GlowConeTap.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\EdgeApply.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\SunShafts.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\ColorCorrectionCurves.shader" />
+     <None Include="Assets\Standard Assets\Blob-Shadow\ProjectorDecal.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_BloomAndFlares\HollywoodFlareBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\Helpers.cginc" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\addbrightstuff.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_BloomAndFlares\VignetteShader.shader" />
+     <None Include="Assets\Standard Assets\Tessellation Shaders\BumpedSpecularSmooth.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\PreDepthOfFieldZRead.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_DepthOfField\CopyDepthToRGBA.shader" />
+     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\GlowCompose.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\DepthRGBA8RadialBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\ContrastComposite.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\FisheyeShader.shader" />
+     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_DepthOfField\PreDepthOfField.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\BrightPass.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\SkyboxToRGBADepth.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_BloomAndFlares\AddAlphaHack.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_DepthOfField\RecordCenterDepth.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\RecordCenterDepth.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\DepthRecord.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\RadialBlurDepth.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\LensFlareComposite.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\ConvertDepth.shader" />
+     <None Include="Assets\Standard Assets\Blob-Shadow\ProjectorMultiply.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\ColorCorrectionCurvesSimple.shader" />
+     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\CreaseApply.shader" />
+     <None Include="Assets\Standard Assets\Water\Sources\FX-Water Simple.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\ChromaticAberrationShader.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\ColorCorrectionSelective.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\EdgeBlurApply.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\PoissonBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_DepthOfField\PreDepthOfFieldZRead.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_DepthOfField\DofForegroundBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_DepthOfField\SeparableBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\EdgeDetectNormalsHQ.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_DepthOfField\SeparableRGBADepthBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\RadialBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_BloomAndFlares\HollywoodFlareStretch.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\VignettingShader.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_BloomAndFlares\BrightPassFilter.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_BloomAndFlares\LensFlareCreate.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\EdgeDetectNormals.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\BrightPassReplacement.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\ClearExceptSkyboxShader.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\LightShafts.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\SimpleClear.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\_DepthOfField\DepthOfField.shader" />
+     <None Include="Assets\Standard Assets\Tessellation Shaders\BumpedSpecularDisplacement.shader" />
+     <None Include="Assets\Standard Assets\Blob-Shadow\ShadowProjection.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\DepthDownsample.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\Image Based\Sources\Shaders\RadialBlurDepthWeighted.shader" />
+ <Reference Include="Assembly-UnityScript-firstpass">
+ <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
+      <Project>{C7E21139-ED1E-8025-5A61-39427BAE730D}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

@@ -3,21 +3,21 @@ using System.Collections;
 
 public class Heuristic {
 	
-	private Node goalNode = new Node();
+	private GameObject goalNode;
 	
-	public Heuristic(Node n)	
+	public Heuristic(GameObject n)	
 	{
-		this.goalNode = goalNode;
+		this.goalNode = n;
 	}
 	
-	public Node getGoal()
+	public GameObject getGoal()
 	{
 		return this.goalNode;
 	}
 	
-	public void setGoal(Node n)
+	public void setGoal(GameObject n)
 	{
-		this.goalNode = goalNode;
+		this.goalNode = n;
 	}
 	
 	public float euclideanDistanceEstimate(GameObject n)

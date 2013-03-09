@@ -4,36 +4,36 @@ using System.Collections.Generic;
 
 public class NavMeshGenerator : MonoBehaviour 
 {
-	//public float MaxHeigth;
-	//public float MinHeight;
+	public float MaxHeigth;
 	
 	public GameObject NodeObj;
 	
-	//public float WallDistance;	
+	public LayerMask nodeLayerMask;
+	
+	public LayerMask collisionLayerMask;
+	
+	//public float NodeToNodeDistance;	
 	public float NodeToNodeDistance;
+	//Distance to which a Node is allowed to exist from an object
+	private float NodeToObjectDistance;
 	
 	private List<GameObject> OpenList = new List<GameObject>();
 	//You can't modify a List in a foreach loop
 	private List<Vector3> NodesToBeCreated = new List<Vector3>();
-	
-	
-	public LayerMask nodeLayerMask;
-	public LayerMask collisionLayerMask;
-	
+
 	
 	[ContextMenu ("Create Nodes")]
 	void generateNodes()
 	{
+		NodeToObjectDistance = NodeToNodeDistance/2;
 		OpenList = new List<GameObject>();
 		NodesToBeCreated = new List<Vector3>();
-		//OpenList.Add(transform.position);	
 		createNode(transform.position);
 		
 		while(OpenList.Count > 0)
 		{
 			foreach(GameObject node in OpenList)
 			{
-				//createPossibleNodes(node);
 				getLocationsForNodes(node);
 			}
 			OpenList.Clear();
@@ -43,7 +43,8 @@ public class NavMeshGenerator : MonoBehaviour
 			}
 			NodesToBeCreated.Clear();
 		}
-	}
+		connectNodes();
+ 	}
 	
 	
 	public void getLocationsForNodes(GameObject node)
@@ -61,7 +62,6 @@ public class NavMeshGenerator : MonoBehaviour
 		temp = new Vector3(node.transform.position.x, node.transform.position.y, (node.transform.position.z - NodeToNodeDistance));
 		Physics.Raycast(node.transform.position, (temp - node.transform.position), out hit, NodeToNodeDistance);
 		raycastHitAction(hit, temp);
-		//node.GetComponent<Node>().setProcessed(true);
 	}
 	
 	
@@ -71,17 +71,28 @@ public class NavMeshGenerator : MonoBehaviour
 		if(!(locationIsInArray(nodes, location)))
 		{
 			GameObject item = (GameObject)Instantiate(NodeObj, location, Quaternion.identity);
-			OpenList.Add(item);
+			bool create  = testDistance(item);
+			if(create)
+			{
+				OpenList.Add(item);
+			}
+			else
+			{
+				DestroyImmediate(item);
+			}
 		}
-		//NodesToBeCreated.Remove(location);
 	}
 	
-	/*public void addToList(GameObject item)
+	public bool testDistance(GameObject node)
 	{
-		OpenList.Add(item);
-		
-	}*/
-	
+		Collider[] cols = Physics.OverlapSphere(node.transform.position, NodeToObjectDistance, collisionLayerMask);
+		if(cols.Length > 0 )
+		{
+			
+			return false;
+		}
+		return true;
+	}
 	
 	void raycastHitAction(RaycastHit hit, Vector3 location)
 	{
@@ -101,5 +112,16 @@ public class NavMeshGenerator : MonoBehaviour
 			}
 		}
 		return false;
+	}
+	
+	
+	void connectNodes()
+	{
+		GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
+		foreach(GameObject node in nodes)
+		{
+			node.GetComponent<Node>().nodeRadius = 1.1f* NodeToNodeDistance;
+			node.GetComponent<Node>().SendMessage("getNeighbouringNodes");
+		}
 	}
 }
