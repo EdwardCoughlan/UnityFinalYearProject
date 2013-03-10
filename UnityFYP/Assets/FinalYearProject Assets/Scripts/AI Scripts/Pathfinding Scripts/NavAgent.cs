@@ -21,19 +21,20 @@ public class NavAgent : MonoBehaviour
 	GameObject goal;
 	
 	
-	GameObject objectiveNode;
+	public GameObject objectiveNode;
 	// Use this for initialization
 	void Start ()
 	{
 		currentNode = gameObject.GetComponent<CurrentNode>().currentNode;
 		previousNode = gameObject.GetComponent<CurrentNode>().currentNode;
+		
 	}
 	
 	
 	void FixedUpdate()
 	{
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
-		if(path.Pop() == null)
+		if(path.Pop() == null || path == null)
 		{
 			path = pathfinder.Dijkstra(gameObject.GetComponent<CurrentNode>().currentNode,objectiveNode.GetComponent<CurrentNode>().currentNode);
 		}
