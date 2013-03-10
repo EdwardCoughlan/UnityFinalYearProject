@@ -55,15 +55,14 @@ public class NavAgent : MonoBehaviour
 		
 		//GameObject.FindGameObjectsWithTag("Node"),
 		//Debug.Log (player);
-			if(path != null)
-			{
-				//goal = path.Pop();
-				Vector3 goalPosition = goal.transform.position;
-				Vector3 goalDirection = goalPosition - transform.position;
-				goalDirection.y = 0.0f;
-				Vector3 normalizedGoalDirection = goalDirection.normalized;
-				transform.position += transform.forward * speed * Time.deltaTime;
-				transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(normalizedGoalDirection), turnSpeed*Time.deltaTime);
-			}
+		if(path != null)
+		{
+			Vector3 goalPosition = goal.transform.position;
+			Vector3 goalDirection = goalPosition - transform.position;
+			goalDirection.y = 0.0f;
+			Vector3 normalizedGoalDirection = goalDirection.normalized;
+			transform.position += transform.forward * speed * Time.deltaTime;
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(normalizedGoalDirection), turnSpeed*Time.deltaTime);
+		}
 	}
 }
