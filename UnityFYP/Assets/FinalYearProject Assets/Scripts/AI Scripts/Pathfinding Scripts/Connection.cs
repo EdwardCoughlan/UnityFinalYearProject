@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Connection
+public class Connection: MonoBehaviour
 {
 	
 	public float cost;
@@ -9,15 +9,11 @@ public class Connection
 	public GameObject toNode;
 	// Use this for initialization
 	
-	public Connection(GameObject fromNode, GameObject toNode)
+	public void setConnection(GameObject fromNode, GameObject toNode)
 	{
 		this.fromNode = fromNode;
 		this.toNode = toNode;
 		setCost();
-	}
-	
-	public Connection ()
-	{
 	}
 	
 	public void setCost()

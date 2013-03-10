@@ -8,6 +8,8 @@ public class NavMeshGenerator : MonoBehaviour
 	
 	public GameObject NodeObj;
 	
+	public GameObject ConnectionObj;
+	
 	public LayerMask nodeLayerMask;
 	
 	public LayerMask collisionLayerMask;
@@ -121,7 +123,8 @@ public class NavMeshGenerator : MonoBehaviour
 		foreach(GameObject node in nodes)
 		{
 			node.GetComponent<Node>().nodeRadius = 1.1f* NodeToNodeDistance;
-			node.GetComponent<Node>().SendMessage("getNeighbouringNodes");
+			node.GetComponent<Node>().getNeighbouringNodes();
+			node.GetComponent<Node>().generateConnections();
 		}
 	}
 }

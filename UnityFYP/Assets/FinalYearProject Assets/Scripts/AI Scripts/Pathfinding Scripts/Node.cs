@@ -1,20 +1,18 @@
-	using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[ExecuteInEditMode]
 public class Node : MonoBehaviour 
 {
 	public float nodeRadius = 1f;
 	public LayerMask nodeLayerMask;
 	public LayerMask collisionLayerMask;
 	public List<GameObject> neighbors;
-	
-	public List<Connection> connections = new List<Connection>();
+	public List<GameObject> connections  = new List<GameObject>();
 	public bool renderNodes = true;
 	public bool canGetNeighbours = true;
 	public float cost = 2.0f;
-	
+	public GameObject ConnnectionObj;
 	
 	void OnDrawGizmos()
 	{
@@ -29,7 +27,32 @@ public class Node : MonoBehaviour
 		}
 	}
 	
-	void getNeighbouringNodes()
+	public void generateConnections()
+	{
+		connections.Clear();
+		if( connections.Count > neighbors.Count)
+		{
+			connections = new List<GameObject>();
+		}
+		else
+		{
+			GameObject c = null;
+			foreach(GameObject n in neighbors)
+			{
+				GameObject temp = (GameObject)Instantiate(ConnnectionObj,transform.position, Quaternion.identity);
+				
+				temp.GetComponent<Connection>().setConnection(gameObject, n);
+				connections.Add(temp);
+			}
+		}
+	}
+	
+	public List<GameObject> getConnections()
+	{
+		return this.connections;
+	}
+	
+	public void getNeighbouringNodes()
 	{
 		if(canGetNeighbours)
 		{
@@ -50,64 +73,7 @@ public class Node : MonoBehaviour
 					}
 				}
 			}
-			generateConnections();
-			
 		}
 	}
 	
-		public void addConnection(Connection c)
-	{
-		connections.Add(c);
-	}
-	
-	public List<Connection> getConnections()
-	{
-		return connections;
-	}
-	
-	void generateConnections()
-	{
-		connections.Clear();
-		if( connections.Count > neighbors.Count)
-		{
-			connections = new List<Connection>();
-		}
-		else
-		{
-			Connection c;
-			foreach(GameObject n in neighbors)
-			{
-				c= new Connection(gameObject, n);
-				connections.Add(c);
-			}
-		}
-	}
-	
-	
-	
-	[ContextMenu ("Connect Node to Neighbors")]
-	void FindNeighbors()
-	{
-		neighbors.Clear();
-		
-		Collider [] cols = Physics.OverlapSphere (transform.position, nodeRadius, nodeLayerMask);
-		foreach(Collider node in cols)
-		{
-			if (node.gameObject != gameObject)
-			{
-				RaycastHit hit;
-				Physics.Raycast(transform.position, (node.transform.position - transform.position),out hit, nodeRadius, collisionLayerMask);
-				
-				if (hit.transform != null)
-				{
-					if (hit.transform.gameObject == node.gameObject)
-					{
-						neighbors.Add (node.gameObject);
-					}
-				}
-				
-			}
-		}
-		
-	}
 }

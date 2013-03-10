@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class pathfinder 
 {	
-	public static Stack<GameObject> Dijkstra(GameObject[] Graph, GameObject source, GameObject target)
+	//Wiki Dijkstra
+	public static Stack<GameObject> wikiDijkstra(GameObject[] Graph, GameObject source, GameObject target)
 	{
 		Dictionary<GameObject,float> dist = new Dictionary<GameObject, float>();
 		Dictionary<GameObject,GameObject> previous = new Dictionary<GameObject, GameObject>();
@@ -67,9 +68,16 @@ public class pathfinder
 		}
 		return null;
 	}
-	public static Stack<GameObject> Dijkstra1(GameObject start, GameObject end)
+	public static Stack<GameObject> Dijkstra(GameObject start, GameObject end)
 	{
-		List<Connection> connections = new List<Connection>();
+		Debug.Log (start.GetComponent<Node>().getConnections());
+		if(start.Equals(end))
+		{
+			Stack<GameObject> temp = new Stack<GameObject>();
+			temp.Push(end);
+			return temp;
+		}
+		List<GameObject> connections = new List<GameObject>();
 		GameObject endNode = start;
 		float endNodeCost = 0;
 		NodeRecord endNodeRecord = new NodeRecord();
@@ -94,13 +102,13 @@ public class pathfinder
 				break;
 			}
 		//Debug.Log("End not found contining");
-			connections = current.node.GetComponent<Node>().connections;
+			connections = current.node.GetComponent<Node>().getConnections();
 			//Debug.Log ("Connections" + connections);
-			foreach(Connection connection in connections)
+			foreach(GameObject connection in connections)
 			{
 				//Debug.Log(connection);
-				endNode = connection.toNode;
-				endNodeCost = current.CostSoFar + connection.cost;
+				endNode = connection.GetComponent<Connection>().toNode;
+				endNodeCost = current.CostSoFar + connection.GetComponent<Connection>().cost;
 				
 				if(isInList(endNode ,closedList))  
 				{
@@ -141,7 +149,7 @@ public class pathfinder
 			while(current.node != start)
 			{
 				path.Push(current.node);
-				current = findNodeInList(current.connection.fromNode, closedList);
+				current = findNodeInList(current.connection.GetComponent<Connection>().fromNode, closedList);
 			}
 			return path;
 		}
@@ -149,7 +157,7 @@ public class pathfinder
 	
 	public static Stack<GameObject> AStar(GameObject start, GameObject end, Heuristic heuristic)
 	{
-		List<Connection> connections = new List<Connection>();
+		List<GameObject> connections = new List<GameObject>();
 		GameObject endNode = start;
 		float endNodeCost  = 0f;
 		float endNodeHeuristic = 0.0f;
@@ -175,10 +183,10 @@ public class pathfinder
 				break;
 			}
 			connections = current.node.GetComponent<Node>().connections;
-			foreach(Connection connection in connections)
+			foreach(GameObject connection in connections)
 			{
-				endNode = connection.toNode;
-				endNodeCost = current.CostSoFar+connection.cost;
+				endNode = connection.GetComponent<Connection>().toNode;
+				endNodeCost = current.CostSoFar+connection.GetComponent<Connection>().cost;
 				
 				if(isInList(endNode, closedList))
 				{
@@ -229,7 +237,7 @@ public class pathfinder
 			while(current.node != start)
 			{
 				path.Push(current.node);
-				current = findNodeInList(current.connection.fromNode, closedList);
+				current = findNodeInList(current.connection.GetComponent<Connection>().fromNode, closedList);
 			}
 			//path.Reverse();
 			return path;
@@ -262,12 +270,11 @@ public class pathfinder
 	
 	public static NodeRecord findNodeRecordUsingFromNode(GameObject n, List<NodeRecord> l)
 	{
-		Connection temp;
+		GameObject temp = null;
 		foreach(NodeRecord nr in l)
 		{
-			temp = new Connection(n, nr.node);
 			temp = nr.connection;
-			if(temp.fromNode.Equals(n))
+			if(temp.GetComponent<Connection>().fromNode.Equals(n))
 			{
 				return nr;
 			}

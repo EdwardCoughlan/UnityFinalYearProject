@@ -4,6 +4,7 @@ using System.Collections;
 public class CurrentNode : MonoBehaviour
 {
 	public GameObject currentNode;
+	public bool  IsAi =true;
 	
 	// Use this for initialization
 	void Start ()
@@ -28,6 +29,17 @@ public class CurrentNode : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		SetCurrentNode();
+		if(IsAi == false)
+		{
+			SetCurrentNode();
+		}
+	}
+	
+	void OnTriggerEnter(Collider col)
+	{
+		if(col.tag == "Node")
+		{
+			currentNode = col.gameObject;
+		}
 	}
 }
