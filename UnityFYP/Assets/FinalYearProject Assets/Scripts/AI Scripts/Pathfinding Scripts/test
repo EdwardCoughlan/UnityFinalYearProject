@@ -1,0 +1,28 @@
+	if(path.Count == 0)
+		{
+			path = new Stack<GameObject>();
+			path = pathfinder.Dijkstra(gameObject.GetComponent<CurrentNode>().currentNode,objectiveNode.GetComponent<CurrentNode>().currentNode);
+			goal = path.Pop();
+		}
+		if(path != null && currentNode != previousNode)
+		{
+			goal = path.Pop();
+			movement();
+		}
+		else
+		{
+			movement();
+		}
+
+
+		path = pathfinder.AStar(gameObject.GetComponent<CurrentNode>().currentNode,objectiveNode.GetComponent<CurrentNode>().currentNode, hr);
+		if(path != null)
+		{
+			goal = path.Pop();
+			Vector3 goalPosition = goal.transform.position;
+			Vector3 goalDirection = goalPosition - transform.position;
+			goalDirection.y = 0.0f;
+			Vector3 normalizedGoalDirection = goalDirection.normalized;
+			transform.position += transform.forward * speed * Time.deltaTime;
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(normalizedGoalDirection), turnSpeed*Time.deltaTime);
+		}

@@ -44,12 +44,18 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\Behaviour.cs" />
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\Influencer.cs" />
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\PathPlanner.cs" />
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\AnimatorController.cs" />
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\MovementController.cs" />
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\NavAgent.cs" />
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\Region.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Connection.cs" />
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\CoverNode.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\CurrentNode.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Heuristic.cs" />
-     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavAgent.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavMeshGenerator.cs" />
-     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavToCharacterInterChange.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavigationArea.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Node.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NodeRecord.cs" />

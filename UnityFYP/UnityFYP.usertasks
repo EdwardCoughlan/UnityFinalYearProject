@@ -2,8 +2,8 @@
   <Task file="" description="Creat Connection class" completed="True" />
   <Task file="" description="Create Node Class" completed="True" />
   <Task file="" description="Create Graph Class" priority="High" completed="True" />
-  <Task file="" description="Create AStarPathfinding Algorythm " priority="High" />
-  <Task file="" description="Astar" />
+  <Task file="" description="Create AStarPathfinding Algorythm " priority="High" completed="True" />
+  <Task file="" description="Astar" completed="True" />
   <Task file="" description="Fix Dijkstra" completed="True" />
-  <Task file="" description="Create a Node genereation mesh" />
+  <Task file="" description="Create a Node genereation mesh" completed="True" />
 </ListOfTask>

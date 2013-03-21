@@ -27,13 +27,13 @@ public class CurrentNode : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	/*void Update ()
 	{
 		if(IsAi == false)
 		{
 			SetCurrentNode();
 		}
-	}
+	}*/
 	
 	void OnTriggerEnter(Collider col)
 	{

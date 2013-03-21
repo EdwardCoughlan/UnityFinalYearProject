@@ -18,6 +18,22 @@ public class Node : MonoBehaviour
 	{
 		if(renderNodes)
 		{
+			if(cost == 40)
+			{
+				Gizmos.color = Color.red;
+			}
+			else if(cost == 20)
+			{
+				Gizmos.color = Color.yellow;
+			}
+			else if(cost == 10)
+			{
+				Gizmos.color = Color.green;
+			}
+			else
+			{
+				Gizmos.color = Color.black;
+			}
 			Gizmos.DrawWireSphere(transform.position, 0.1f);
 			foreach(GameObject n in neighbors)
 			{
@@ -36,7 +52,6 @@ public class Node : MonoBehaviour
 		}
 		else
 		{
-			GameObject c = null;
 			foreach(GameObject n in neighbors)
 			{
 				GameObject temp = (GameObject)Instantiate(ConnnectionObj,transform.position, Quaternion.identity);
@@ -45,6 +60,7 @@ public class Node : MonoBehaviour
 				connections.Add(temp);
 			}
 		}
+		GetComponent<SphereCollider>().radius = 0.1f;
 	}
 	
 	public List<GameObject> getConnections()

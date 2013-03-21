@@ -1,15 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\PathFinder.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\PathPlanner.cs">
     <Files>
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavAgent.cs" Line="37" Column="1" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Heuristic.cs" Line="1" Column="1" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\CurrentNode.cs" Line="1" Column="1" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Node.cs" Line="1" Column="1" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavMeshGenerator.cs" Line="1" Column="1" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Connection.cs" Line="1" Column="1" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NodeRecord.cs" Line="1" Column="1" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\PathFinder.cs" Line="74" Column="24" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\CoverNode.cs" Line="1" Column="1" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\AnimatorController.cs" Line="1" Column="1" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\PathPlanner.cs" Line="29" Column="39" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\PathFinder.cs" Line="1" Column="1" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\NavAgent.cs" Line="16" Column="27" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Node.cs" Line="35" Column="32" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\Region.cs" Line="20" Column="36" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\Influencer.cs" Line="21" Column="78" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,9 +19,11 @@
               <Node name="FinalYearProject Assets" expanded="True">
                 <Node name="Scripts" expanded="True">
                   <Node name="AI Scripts" expanded="True">
-                    <Node name="Pathfinding Scripts" expanded="True">
-                      <Node name="PathFinder.cs" selected="True" />
+                    <Node name="Behavior Scripts" expanded="True">
+                      <Node name="PathPlanner.cs" selected="True" />
                     </Node>
+                    <Node name="Movement Scripts" expanded="True" />
+                    <Node name="Pathfinding Scripts" expanded="True" />
                   </Node>
                 </Node>
               </Node>
@@ -36,7 +38,9 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Users\Edward\Final Year Project Repository\UnityFinalYearProject\UnityFYP\Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\PathFinder.cs" line="73" />
+      <Breakpoint file="C:\Users\Edward\Final Year Project Repository\UnityFinalYearProject\UnityFYP\Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavMeshGenerator.cs" line="31" />
+      <Breakpoint file="C:\Users\Edward\Final Year Project Repository\UnityFinalYearProject\UnityFYP\Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavAgent.cs" line="91" />
+      <Breakpoint file="C:\Users\Edward\Final Year Project Repository\UnityFinalYearProject\UnityFYP\Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavAgent.cs" line="29" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

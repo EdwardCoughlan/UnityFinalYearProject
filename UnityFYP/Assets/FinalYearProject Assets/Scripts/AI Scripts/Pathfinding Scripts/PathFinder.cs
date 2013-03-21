@@ -70,7 +70,7 @@ public class pathfinder
 	}
 	public static Stack<GameObject> Dijkstra(GameObject start, GameObject end)
 	{
-		Debug.Log (start.GetComponent<Node>().getConnections());
+		//Debug.Log (start.GetComponent<Node>().getConnections());
 		if(start.Equals(end))
 		{
 			Stack<GameObject> temp = new Stack<GameObject>();
@@ -239,6 +239,7 @@ public class pathfinder
 				path.Push(current.node);
 				current = findNodeInList(current.connection.GetComponent<Connection>().fromNode, closedList);
 			}
+			path.Push(end);
 			//path.Reverse();
 			return path;
 		}
