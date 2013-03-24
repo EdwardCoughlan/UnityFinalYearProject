@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class pathfinder 
 {	
-	//Wiki Dijkstra
+	//Wiki Dijkstra similar to the one used by pushy pixels
 	public static Stack<GameObject> wikiDijkstra(GameObject[] Graph, GameObject source, GameObject target)
 	{
 		Dictionary<GameObject,float> dist = new Dictionary<GameObject, float>();
@@ -37,8 +37,6 @@ public class pathfinder
 			
 			Q.Remove(u);
 			
-			
-			//Check to see if we made it to the target
 			if(u == target)
 			{
 				Stack<GameObject> S = new Stack<GameObject>();
@@ -93,7 +91,7 @@ public class pathfinder
 		//Debug.Log (current);
 		while(openList.Count > 0)
 		{
-			//Debug.Log ("going through openlist");
+			Debug.Log ("going through openlist");
 			current = getSmallestElement(openList);
 			//Debug.Log (current);
 			if(current.node.Equals(end))
@@ -108,7 +106,7 @@ public class pathfinder
 			{
 				//Debug.Log(connection);
 				endNode = connection.GetComponent<Connection>().toNode;
-				endNodeCost = current.CostSoFar + connection.GetComponent<Connection>().cost;
+				endNodeCost = current.CostSoFar + connection.GetComponent<Connection>().cost + endNode.GetComponent<Node>().cost;
 				
 				if(isInList(endNode ,closedList))  
 				{
@@ -186,7 +184,7 @@ public class pathfinder
 			foreach(GameObject connection in connections)
 			{
 				endNode = connection.GetComponent<Connection>().toNode;
-				endNodeCost = current.CostSoFar+connection.GetComponent<Connection>().cost;
+				endNodeCost = current.CostSoFar+connection.GetComponent<Connection>().cost + endNode.GetComponent<Node>().cost;
 				
 				if(isInList(endNode, closedList))
 				{

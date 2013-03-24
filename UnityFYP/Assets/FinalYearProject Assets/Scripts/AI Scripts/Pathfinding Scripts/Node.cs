@@ -11,24 +11,28 @@ public class Node : MonoBehaviour
 	public List<GameObject> connections  = new List<GameObject>();
 	public bool renderNodes = true;
 	public bool canGetNeighbours = true;
-	public float cost = 2.0f;
+	public float cost = 1000f;
 	public GameObject ConnnectionObj;
 	
 	void OnDrawGizmos()
 	{
 		if(renderNodes)
 		{
-			if(cost == 40)
+			if(cost == 150f)
 			{
 				Gizmos.color = Color.red;
 			}
-			else if(cost == 20)
+			else if(cost == 60f)
 			{
 				Gizmos.color = Color.yellow;
 			}
-			else if(cost == 10)
+			else if(cost == 10f)
 			{
 				Gizmos.color = Color.green;
+			}
+			else if(cost == 700f)
+			{
+				Gizmos.color = Color.blue;
 			}
 			else
 			{

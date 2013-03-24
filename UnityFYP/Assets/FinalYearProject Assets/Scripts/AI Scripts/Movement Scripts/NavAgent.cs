@@ -10,11 +10,23 @@ public class NavAgent : MonoBehaviour
 	public GameObject currentNode;
 	[HideInInspector]
 	public GameObject previousNode;
-	[HideInInspector]
-	public GameObject ObjectiveCurrentNode;
-	[HideInInspector]
-	public GameObject ObjectivePreviousNode;
 	public bool goalreached = false;
+	
+	public GameObject Influencer;
+	
+	public bool isPrimary = false;
+	
+	public GameObject primary;
+	
+	
+	public bool combine = true;
+	public bool split = false;
+	public bool splitCombine = false;
+	public bool CombineSplit = false;
+	
+	
+	[HideInInspector]
+	public bool moveTo = false;
 	
 	Stack<GameObject> path = null;
 //	int count = 0;
@@ -36,7 +48,60 @@ public class NavAgent : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{ 
-		if (goalreached)
+		if(moveTo == true)
+		{
+			if(primary.GetComponent<NavAgent>().path.Count != 0 || isPrimary == true)
+			{
+				if (goalreached)
+				{
+					goalreached = true;
+					//Debug.Log("goal reached");
+				}
+				else
+				{
+					if(path.Count == 0)
+					{
+						path = new Stack<GameObject>();
+						hr = new Heuristic(objectiveNode.GetComponent<CurrentNode>().currentNode);
+						path = pathfinder.AStar(gameObject.GetComponent<CurrentNode>().currentNode,objectiveNode.GetComponent<CurrentNode>().currentNode, hr);
+						if(isPrimary == true)
+						{
+							Stack<GameObject> pathTemp = pathfinder.AStar(gameObject.GetComponent<CurrentNode>().currentNode,objectiveNode.GetComponent<CurrentNode>().currentNode, hr);
+							InfluencePath(pathTemp);
+						}
+						try{
+							goal = path.Pop();
+						}
+						finally
+						{
+							movement();
+						}
+						
+					}
+					else if(currentNode != previousNode)
+					{
+						try{	
+						goal = path.Pop();
+						}
+						finally
+						{
+							currentNode = gameObject.GetComponent<CurrentNode>().currentNode;
+							previousNode = gameObject.GetComponent<CurrentNode>().currentNode;
+							movement();
+						}
+					}
+					else
+					{
+						movement();
+						currentNode = gameObject.GetComponent<CurrentNode>().currentNode;
+					}
+				}
+			}
+		}
+		
+		else 
+		{
+			if (goalreached)
 		{
 			//goalreached = true;
 			//Debug.Log("goal reached");
@@ -45,13 +110,14 @@ public class NavAgent : MonoBehaviour
 		{
 			if(gameObject.GetComponent<CurrentNode>().currentNode.Equals(objectiveNode.GetComponent<CurrentNode>().currentNode))
 			{
-				goalreached = true;
+				goalreached = false;
 			}
 			if(path.Count == 0)
 			{
 				path = new Stack<GameObject>();
-				hr = new Heuristic(objectiveNode.GetComponent<CurrentNode>().currentNode);
-				path = pathfinder.AStar(gameObject.GetComponent<CurrentNode>().currentNode,objectiveNode.GetComponent<CurrentNode>().currentNode, hr);
+				GameObject player = GameObject.FindGameObjectWithTag("Player");
+				hr = new Heuristic(player.GetComponent<CurrentNode>().currentNode);
+				path = pathfinder.AStar(gameObject.GetComponent<CurrentNode>().currentNode,player.GetComponent<CurrentNode>().currentNode, hr);
 				try{
 					goal = path.Pop();
 				}
@@ -79,6 +145,7 @@ public class NavAgent : MonoBehaviour
 				currentNode = gameObject.GetComponent<CurrentNode>().currentNode;
 			}
 		}
+		}
 	}
 	
 	
@@ -91,5 +158,69 @@ public class NavAgent : MonoBehaviour
 		Vector3 normalizedGoalDirection = goalDirection.normalized;
 		transform.position += transform.forward * speed * Time.deltaTime;
 		transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(normalizedGoalDirection), turnSpeed*Time.deltaTime);
+	}
+	
+	
+	public void InfluencePath(Stack<GameObject> pathTemp)
+	{	
+		GameObject nodeTemp = null;
+		GameObject influencerTemp = null;
+		int pathCount = pathTemp.Count;
+		int counter = 0;
+		while(pathTemp.Count != 0)
+		{
+			checkMultiChoice(counter, pathCount);
+			nodeTemp = pathTemp.Pop();
+			//If Split is true then it will be cheaper to find a path that is further away from the Main character
+			influencerTemp = (GameObject)Instantiate(Influencer, nodeTemp.transform.position, Quaternion.identity);
+			if(split == true)
+			{
+				influencerTemp.GetComponent<Influencer>().Size = 4f;
+				influencerTemp.GetComponent<Influencer>().CreateInfluenceSphereAndModifyInfluence(10f,0);
+				influencerTemp.GetComponent<Influencer>().Size = 2f;
+				influencerTemp.GetComponent<Influencer>().CreateInfluenceSphereAndModifyInfluence(60f,0);
+				influencerTemp.GetComponent<Influencer>().Size = 1f;
+				influencerTemp.GetComponent<Influencer>().CreateInfluenceSphereAndModifyInfluence(150f,0);	
+			}
+			
+			//If Combine is true then it will be cheaper to find a cover node near to the main characters
+			if(combine == true)
+			{
+				influencerTemp.GetComponent<Influencer>().Size = 4f;
+				influencerTemp.GetComponent<Influencer>().CreateInfluenceSphereAndModifyInfluence(150f,1);
+				influencerTemp.GetComponent<Influencer>().Size = 2f;
+				influencerTemp.GetComponent<Influencer>().CreateInfluenceSphereAndModifyInfluence(60f,1);
+				influencerTemp.GetComponent<Influencer>().Size = 1f;
+				influencerTemp.GetComponent<Influencer>().CreateInfluenceSphereAndModifyInfluence(10f,1);	
+			}
+			//nodeTemp.GetComponent<Node>().cost = 700f;
+			counter= counter + 1;
+			DestroyImmediate(influencerTemp);
+		}
+		
+	}
+	
+	void checkMultiChoice(int counter, int pathCount)
+	{
+		if(splitCombine == true)
+		{
+			split = true;
+			combine = false;
+			if(counter > (pathCount/2))
+			{
+				split = false;
+				combine = true;
+			}
+		}
+		if(CombineSplit == true)
+		{
+			split = false;
+			combine = true;
+			if(counter > (pathCount/2))
+			{
+				split = true;
+				combine = false;
+			}
+		}
 	}
 }

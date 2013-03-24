@@ -27,14 +27,14 @@ public class Influencer : MonoBehaviour {
 				{
 					if(type == 0)
 					{
-						if(col.gameObject.GetComponent<Node>().cost < influence)
+						if(col.gameObject.GetComponent<Node>().cost < influence || col.gameObject.GetComponent<Node>().cost == 600f &&  col.gameObject.GetComponent<Node>().cost != 700f)
 						{
 							col.gameObject.GetComponent<Node>().cost = influence;
 						}
 					}
 					else if(type ==1)
 					{
-						if(col.gameObject.GetComponent<Node>().cost > influence)
+						if(col.gameObject.GetComponent<Node>().cost > influence || col.gameObject.GetComponent<Node>().cost == 600f  &&  col.gameObject.GetComponent<Node>().cost != 700f)
 						{
 							col.gameObject.GetComponent<Node>().cost = influence;
 						}

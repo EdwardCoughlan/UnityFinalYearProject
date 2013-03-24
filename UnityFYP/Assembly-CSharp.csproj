@@ -47,6 +47,8 @@
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\Behaviour.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\Influencer.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\PathPlanner.cs" />
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\RayCastShoot.cs" />
+     <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\TeamController.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\AnimatorController.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\MovementController.cs" />
      <Compile Include="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\NavAgent.cs" />

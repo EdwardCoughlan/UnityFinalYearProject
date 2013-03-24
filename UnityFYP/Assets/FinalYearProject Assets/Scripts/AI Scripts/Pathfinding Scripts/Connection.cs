@@ -18,7 +18,7 @@ public class Connection: MonoBehaviour
 	
 	public void setCost()
 	{
-		this.cost = (toNode.transform.position - fromNode.transform.position).magnitude   +  toNode.GetComponent<Node>().cost;
+		this.cost = (toNode.transform.position - fromNode.transform.position).magnitude;
 	}
 	
 }

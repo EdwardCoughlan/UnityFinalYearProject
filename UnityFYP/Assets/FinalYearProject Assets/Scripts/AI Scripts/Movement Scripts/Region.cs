@@ -28,7 +28,7 @@ public class Region : MonoBehaviour
 	
 	
 	[ContextMenu ("getCoverNodes")]
-	void getCoverNodes()
+	public void getCoverNodes()
 	{
 		coverNodesOpen.Clear ();
 		coverNodesClosed.Clear();

@@ -12,7 +12,8 @@ public class CurrentNode : MonoBehaviour
 		SetCurrentNode();
 	}
 	
-	void SetCurrentNode()
+	
+	public void SetCurrentNode()
 	{
 		float shortestDistance = Mathf.Infinity;
 		foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Node"))
