@@ -17,12 +17,16 @@ public class NavAgent : MonoBehaviour
 	public bool isPrimary = false;
 	
 	public GameObject primary;
+	public GameObject secondary;
 	
 	
-	public bool combine = true;
-	public bool split = false;
+	public bool combine = false;
+	public bool split = true;
 	public bool splitCombine = false;
 	public bool CombineSplit = false;
+	
+	
+	public Animator animator;
 	
 	
 	[HideInInspector]
@@ -39,10 +43,12 @@ public class NavAgent : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		animator = gameObject.GetComponent<Animator>();
 		currentNode = gameObject.GetComponent<CurrentNode>().currentNode;
 		previousNode = gameObject.GetComponent<CurrentNode>().currentNode;
 		hr = new Heuristic(objectiveNode.GetComponent<CurrentNode>().currentNode);
 		path = new Stack<GameObject>();
+		animator.SetBool("Moving", true);
 	}
 	
 	// Update is called once per frame
@@ -54,7 +60,7 @@ public class NavAgent : MonoBehaviour
 			{
 				if (goalreached)
 				{
-					goalreached = true;
+					//goalreached = true;
 					//Debug.Log("goal reached");
 				}
 				else
@@ -66,6 +72,7 @@ public class NavAgent : MonoBehaviour
 						path = pathfinder.AStar(gameObject.GetComponent<CurrentNode>().currentNode,objectiveNode.GetComponent<CurrentNode>().currentNode, hr);
 						if(isPrimary == true)
 						{
+							//ResetWorldInfluence();
 							Stack<GameObject> pathTemp = pathfinder.AStar(gameObject.GetComponent<CurrentNode>().currentNode,objectiveNode.GetComponent<CurrentNode>().currentNode, hr);
 							InfluencePath(pathTemp);
 						}
@@ -108,16 +115,26 @@ public class NavAgent : MonoBehaviour
 		}
 		else
 		{
-			if(gameObject.GetComponent<CurrentNode>().currentNode.Equals(objectiveNode.GetComponent<CurrentNode>().currentNode))
+			GameObject player = GameObject.FindGameObjectWithTag("Player");
+			
+			if(gameObject.GetComponent<CurrentNode>().currentNode.Equals(player.GetComponent<CurrentNode>().currentNode))
 			{
 				goalreached = false;
 			}
 			if(path.Count == 0)
 			{
+				
 				path = new Stack<GameObject>();
-				GameObject player = GameObject.FindGameObjectWithTag("Player");
 				hr = new Heuristic(player.GetComponent<CurrentNode>().currentNode);
 				path = pathfinder.AStar(gameObject.GetComponent<CurrentNode>().currentNode,player.GetComponent<CurrentNode>().currentNode, hr);
+				
+				if(isPrimary == true)
+				{
+					
+					secondary.GetComponent<NavAgent>().path.Clear();
+					Stack<GameObject> pathTemp = pathfinder.AStar(gameObject.GetComponent<CurrentNode>().currentNode,player.GetComponent<CurrentNode>().currentNode, hr);
+					InfluencePath(pathTemp);
+				}	
 				try{
 					goal = path.Pop();
 				}
@@ -167,8 +184,10 @@ public class NavAgent : MonoBehaviour
 		GameObject influencerTemp = null;
 		int pathCount = pathTemp.Count;
 		int counter = 0;
+		ResetWorldInfluence();
 		while(pathTemp.Count != 0)
 		{
+			
 			checkMultiChoice(counter, pathCount);
 			nodeTemp = pathTemp.Pop();
 			//If Split is true then it will be cheaper to find a path that is further away from the Main character
@@ -193,7 +212,7 @@ public class NavAgent : MonoBehaviour
 				influencerTemp.GetComponent<Influencer>().Size = 1f;
 				influencerTemp.GetComponent<Influencer>().CreateInfluenceSphereAndModifyInfluence(10f,1);	
 			}
-			//nodeTemp.GetComponent<Node>().cost = 700f;
+			nodeTemp.GetComponent<Node>().cost = 700f;
 			counter= counter + 1;
 			DestroyImmediate(influencerTemp);
 		}
@@ -221,6 +240,14 @@ public class NavAgent : MonoBehaviour
 				split = true;
 				combine = false;
 			}
+		}
+	}
+	
+	public void ResetWorldInfluence()
+	{
+		foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Node"))
+		{
+			obj.GetComponent<Node>().cost = 1000f;
 		}
 	}
 }

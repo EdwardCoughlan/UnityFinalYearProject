@@ -1,15 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\RayCastShoot.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavMeshGenerator.cs">
     <Files>
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\NavAgent.cs" Line="123" Column="1" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Node.cs" Line="35" Column="31" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\NavAgent.cs" Line="136" Column="6" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Node.cs" Line="1" Column="1" />
       <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NodeRecord.cs" Line="1" Column="1" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Connection.cs" Line="21" Column="82" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\Connection.cs" Line="1" Column="1" />
       <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\PathFinder.cs" Line="1" Column="1" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\RayCastShoot.cs" Line="32" Column="29" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavMeshGenerator.cs" Line="75" Column="4" />
-      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\Region.cs" Line="31" Column="9" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\RayCastShoot.cs" Line="1" Column="1" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Pathfinding Scripts\NavMeshGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\Region.cs" Line="1" Column="1" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Movement Scripts\MovementController.cs" Line="1" Column="1" />
+      <File FileName="Assets\FinalYearProject Assets\Scripts\AI Scripts\Behavior Scripts\Influencer.cs" Line="37" Column="115" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,11 +21,11 @@
               <Node name="FinalYearProject Assets" expanded="True">
                 <Node name="Scripts" expanded="True">
                   <Node name="AI Scripts" expanded="True">
-                    <Node name="Behavior Scripts" expanded="True">
-                      <Node name="RayCastShoot.cs" selected="True" />
-                    </Node>
+                    <Node name="Behavior Scripts" expanded="True" />
                     <Node name="Movement Scripts" expanded="True" />
-                    <Node name="Pathfinding Scripts" expanded="True" />
+                    <Node name="Pathfinding Scripts" expanded="True">
+                      <Node name="Heuristic.cs" selected="True" />
+                    </Node>
                   </Node>
                 </Node>
               </Node>
